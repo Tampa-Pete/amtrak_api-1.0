@@ -84,10 +84,19 @@ print(*G, sep=', ')
 
 #create a tree from the graph by removing cycles
 # undirected graph
+# breath-first search of graph
 # start with a dictionary of listed connections G
-# get list of all possible routes H, where a route h is a list of nodes
+# get list of all possible routes H, where h in H lists the node and child connections
 query = start
-connections = G[query] #value is list
+visited = []
+H = [query]
+def BFSnode:
+    connections = G[query] #value is list
+    for i in connections:
+        if i in visited:
+            continue
+        else:
+            h = 
 # create tree where only one node exists
 
 for (i,j) in keys(G):
