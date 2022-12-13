@@ -11,7 +11,7 @@ graph = {
 #print(json.dumps(graph, indent=4) )
 
 #create a class for tree nodes
-class Node:
+class TreeNode:
     def __init__(self, data):
         self.parent = None
         self.data = data
@@ -23,15 +23,26 @@ class Node:
             child_string += ',' + c.__str__()
         return '["' + str(self.data) + '"' + child_string + ']'
 
-    def add_parent(self, node):
-        self.parent = node
+    def add_child(self, child):
+        cnode = TreeNode(child)
+        self.children.append(cnode)
 
-    def add_child(self, node):
-        self.children.append(node)
-        node.add_parent(self)
+class ChildTreeNode(TreeNode):
+    def __init__(self, data, parent = None):
+        super(data)
+        self.parent = parent
+    
+    def add_parent(self, parent):
+        assert isinstance(parent, ChildTreeNode)
+        self.parent = parent
+
+    def add_child(self, child):
+        cnode = ChildTreeNode(child)
+        cnode.parent = self
+
 
 def process (parent, child):    #parent needs its children
-    x = Node(child)
+    x = TreeNode(child)
     parent.add_child(x)
     return x
 
@@ -39,7 +50,7 @@ def process (parent, child):    #parent needs its children
 queue = []
 #need to know the parents, so "visited" is now "seen"
 seen = set()
-root = Node(1)  #change 1 to "start"
+root = TreeNode(1)  #change 1 to "start"
 
 #enqueue root node
 seen.add(1)  #change 1 to "start"
