@@ -1,0 +1,14 @@
+This program will take stations, routes, and trains from Amtrak's official
+site and create a search algorithm to find optimal paths.
+
+extract Amtrak station data (later) - amtrak has find my station, route, location, etc.
+extract Amtrak route data (later)
+extract Amtrak train data (later)
+    for late trains, only keep track of the delay to next station (not cumulative)
+        wonder about detached instances
+create database (later)
+create graph using database
+create optimal path(s)
+create website
+    think about port forwarding, security and node balancing
+create map

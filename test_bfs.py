@@ -21,11 +21,12 @@ class TreeNode:
         child_string = ""
         for c in self.children:
             child_string += ',' + c.__str__()
-        return '["' + str(self.data) + '"' + child_string + ']'
+        return '[' + str(self.data) + child_string + ']'
 
     def add_child(self, child):
         cnode = TreeNode(child)
         self.children.append(cnode)
+        return cnode
 
 class ChildTreeNode(TreeNode):
     def __init__(self, data, parent = None):
@@ -41,32 +42,28 @@ class ChildTreeNode(TreeNode):
         cnode.parent = self
 
 
-def process (parent, child):    #parent needs its children
-    x = TreeNode(child)
+'''def process (parent, child):    #parent needs its children
     parent.add_child(x)
-    return x
+    return x'''
 
-#BFS on graph, knowing the parents
+#BFS on graph
 queue = []
-#need to know the parents, so "visited" is now "seen"
-seen = set()
+visited = set()
 root = TreeNode(1)  #change 1 to "start"
 
 #enqueue root node
-seen.add(1)  #change 1 to "start"
 queue.append(root)
 
 while queue:
     review = queue.pop(0)   #queue already has node datastructure
 
-    #see the reviewer's neighbors
-    neighbors = graph[review.data]  #returns list
-
-    for n in neighbors:
-        if n not in seen:
-            seen.add(n)
-            p = process(review, n)
-            queue.append(p)
+    if review.data not in visited:
+        visited.add(review.data)
+        neighbors = graph[review.data]  #returns list
+        for neighbor in neighbors:
+            if neighbor not in visited:
+                p = review.add_child(neighbor)  #process(review, neighbor)
+                queue.append(p)
 
 #print tree
 print(root)
