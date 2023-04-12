@@ -26,16 +26,11 @@ class amtrak_station:
         self.routes = [amtrak_train_station.__init__]   #change to trains needing stations rather than this
 
 
-#change below logging to only include root name
-#also change %(name) to the function name, see: https://docs.python.org/3/library/logging.html#logrecord-attributes
-#logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(name)s - %(message)s')
+#getting logger for this code, not Selenium, see: https://docs.python.org/3/library/logging.html#logrecord-attributes
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-#below will print logs to terminal
-#handler = logging.StreamHandler()
-#below will print logs to file
 handler = logging.FileHandler('extract_amtrak.log')
-formatter = logging.Formatter('%(module)s - %(levelname)s - %(message)s')
+formatter = logging.Formatter('%(funcName)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
